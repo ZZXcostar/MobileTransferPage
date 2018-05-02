@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <button>点击测试</button>
   </div>
 </template>
 
@@ -14,55 +13,38 @@ export default {
     }
   },
   created(){
-      let companyid=this.$route.query.company
-      let code=this.$route.query.code
-      this.company =  companyid
-      this.code = code
-       if(companyid!=null){
-            sessionStorage.setItem('companyId',companyid);
-        }
-        if(code!=null){
-            this.getOpenid().then(flag=>{
-                if(flag){
-                    if(this.$route.params.logining!=null&&this.$route.params.logining){
-                        this.selected='我的';
-                        this.$router.push('/login');
-                    }
-                }
-            });
+        let companyid=this.$route.query.company
+        let code=this.$route.query.code
+        this.company =  companyid
+        this.code = code
+        if(companyid!=null&&code!=null){
+            this.getOpenid()
         }
         else{
-            if(sessionStorage.getItem('openId')==null){
-                alert('请授权后再登录商城');
-            }
+            alert('处理出现错误');
+            location.href='http://www.itchun.com';
         }
         
   },
   methods:{
     //获取用户openid
         getOpenid(){
-           return  new Promise((resolve,reject)=>{
-                let that=this;
-                this.$http.get('/api/product/order/weixin/user?companyId='+this.company+'&code='+this.code)
-                .then(res=>{
-                    if(res.data.info.code){
-                        let openid=res.data.info.openId;
-                        sessionStorage.setItem('openId',openid);
-                        resolve(true);
-                    }
-                    else{
-                        resolve(false);
-                         alert(res.data.msg);
-                        // Toast('xxx');
-                    }
-                })
-                .catch(err=>{
-                    alert('获取openid失败');
-                    console.log(err);
-                    resolve(false);
-                })
+            let that=this;
+            this.$http.get('/api/product/order/weixin/user?companyId='+this.company+'&code='+this.code)
+            .then(res=>{
+                if(res.data.info.code){
+                    let openid=res.data.info.openId;
+                    location.href='http://www.itchun.com/login?openId='+openid;
+                }
+                else{
+                   alert(res.data.msg);
+                }
+                
             })
-            
+            .catch(err=>{
+                alert('获取openid失败');
+                console.log(err);
+            })
         }
   }
 }
