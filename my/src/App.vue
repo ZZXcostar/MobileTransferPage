@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <h6>正在跳转中...</h6>
     <router-view/>
   </div>
 </template>
