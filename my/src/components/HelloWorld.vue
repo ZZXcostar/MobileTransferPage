@@ -1,6 +1,5 @@
 <template>
   <div class="hello">
-    <!-- <button>点击测试</button> -->
   </div>
 </template>
 
@@ -14,7 +13,6 @@ export default {
     }
   },
   created(){
-      alert('跳转准备');
         let companyid=this.$route.query.company
         let code=this.$route.query.code
         this.company =  companyid
@@ -24,6 +22,7 @@ export default {
         }
         else{
             alert('处理出现错误');
+            location.href='http://www.itchun.com';
         }
         
   },
@@ -35,11 +34,12 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    sessionStorage.setItem('openId',openid);
+                    location.href='http://www.itchun.com/login?openId='+openid;
                 }
                 else{
                    alert(res.data.msg);
                 }
+                
             })
             .catch(err=>{
                 alert('获取openid失败');
