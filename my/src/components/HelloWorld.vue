@@ -9,10 +9,12 @@ export default {
   data () {
     return {
       company:'',
-      code:''
+      code:'',
+      hostName:'',
     }
   },
   created(){
+        this.hostName = location.hostname;
         let companyid=this.$route.query.company
         let code=this.$route.query.code
         this.company =  companyid
@@ -22,7 +24,7 @@ export default {
         }
         else{
             alert('处理出现错误');
-            location.href='http://www.itchun.com';
+            location.href='http://'+this.hostName;
         }
         
   },
@@ -34,7 +36,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://www.itchun.com/login?openId='+openid;
+                    location.href='http://'+this.hostName+'/login?openId='+openid;
                 }
                 else{
                    alert(res.data.msg);
