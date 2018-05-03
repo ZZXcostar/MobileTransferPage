@@ -24,7 +24,7 @@ export default {
         }
         else{
             alert('处理出现错误');
-            location.href='http://'+this.hostName;
+            location.href='http://daojia.jingrunjia.com.cn';
         }
         
   },
@@ -36,7 +36,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://'+this.hostName+'/login?openId='+openid;
+                    location.href='http://daojia.jingrunjia.com.cn/login?openId='+openid;
                 }
                 else{
                    alert(res.data.msg);
