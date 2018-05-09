@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <h6>正在跳转中...</h6>
+    <p style='font-size:16px;text-align:center;'>跳转中...</p>
     <router-view/>
   </div>
 </template>

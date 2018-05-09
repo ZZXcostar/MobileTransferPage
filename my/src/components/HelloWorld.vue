@@ -41,7 +41,6 @@ export default {
                 else{
                    alert(res.data.msg);
                 }
-                
             })
             .catch(err=>{
                 alert('获取openid失败');
