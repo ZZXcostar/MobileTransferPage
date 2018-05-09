@@ -24,7 +24,7 @@ export default {
         }
         else{
             alert('处理出现错误');
-            location.href='http://www.itchun.com';
+            location.href='http://daojia.jingrunjia.com.cn';
         }
         
   },
@@ -36,7 +36,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://www.itchun.com/login?openId='+openid+'&companyId='+that.company;
+                    location.href='http://daojia.jingrunjia.com.cn/login?openId='+openid+'&companyId='+that.company;
                 }
                 else{
                    alert(res.data.msg);
