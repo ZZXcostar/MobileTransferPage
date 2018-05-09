@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
+    <p style='font-size:16px;text-align:center;'>跳转中...</p>
     <router-view/>
   </div>
 </template>
