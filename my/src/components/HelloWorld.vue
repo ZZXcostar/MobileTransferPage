@@ -9,10 +9,12 @@ export default {
   data () {
     return {
       company:'',
-      code:''
+      code:'',
+      hostName:'',
     }
   },
   created(){
+        this.hostName = location.hostname;
         let companyid=this.$route.query.company
         let code=this.$route.query.code
         this.company =  companyid
