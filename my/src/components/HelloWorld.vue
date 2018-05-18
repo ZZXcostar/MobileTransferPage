@@ -11,14 +11,27 @@ export default {
       company:'',
       code:'',
       hostName:'',
+      recommendedTeamId:'',
+      recommendedAdminId:'',
     }
   },
   created(){
+        let json=JSON.parse(this.$route.query.json);
+
         this.hostName = location.hostname;
-        let companyid=this.$route.query.company
-        let code=this.$route.query.code
+        // let companyid=this.$route.query.company
+        // let code=this.$route.query.code;
+        // let recommendedTeamId=this.$route.query.recommendedTeamId;
+        // let recommendedAdminId=this.$route.query.recommendedAdminId;
+        let companyid=json.company
+        let code=this.$route.query.code;
+        let recommendedTeamId=json.recommendedTeamId;
+        let recommendedAdminId=json.recommendedAdminId;
         this.company =  companyid
         this.code = code
+        this.recommendedTeamId=recommendedTeamId;
+        this.recommendedAdminId=recommendedAdminId;
+        
         if(companyid!=null&&code!=null){
             this.getOpenid()
         }
@@ -36,7 +49,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='daojia.jingrunjia.com.cn/login?openId='+openid+'&companyId='+that.company;
+                    location.href='http://daojia.jingrunjia.com.cn/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
                 }
                 else{
                    alert(res.data.msg);
