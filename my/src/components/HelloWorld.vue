@@ -16,11 +16,17 @@ export default {
     }
   },
   created(){
+        let json=JSON.parse(this.$route.query.json);
+
         this.hostName = location.hostname;
-        let companyid=this.$route.query.company
+        // let companyid=this.$route.query.company
+        // let code=this.$route.query.code;
+        // let recommendedTeamId=this.$route.query.recommendedTeamId;
+        // let recommendedAdminId=this.$route.query.recommendedAdminId;
+        let companyid=json.company
         let code=this.$route.query.code;
-        let recommendedTeamId=this.$route.query.recommendedTeamId;
-        let recommendedAdminId=this.$route.query.recommendedAdminId;
+        let recommendedTeamId=json.recommendedTeamId;
+        let recommendedAdminId=json.recommendedAdminId;
         this.company =  companyid
         this.code = code
         this.recommendedTeamId=recommendedTeamId;
@@ -31,7 +37,7 @@ export default {
         }
         else{
             alert('处理出现错误');
-            location.href='daojia.jingrunjia.com.cn';
+            location.href='http://daojia.jingrunjia.com.cn';
         }
         
   },
@@ -43,7 +49,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='daojia.jingrunjia.com.cn?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
+                    location.href='http://daojia.jingrunjia.com.cn/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
                 }
                 else{
                    alert(res.data.msg);
