@@ -11,20 +11,27 @@ export default {
       company:'',
       code:'',
       hostName:'',
+      recommendedTeamId:'',
+      recommendedAdminId:'',
     }
   },
   created(){
         this.hostName = location.hostname;
         let companyid=this.$route.query.company
-        let code=this.$route.query.code
+        let code=this.$route.query.code;
+        let recommendedTeamId=this.$route.query.recommendedTeamId;
+        let recommendedAdminId=this.$route.query.recommendedAdminId;
         this.company =  companyid
         this.code = code
+        this.recommendedTeamId=recommendedTeamId;
+        this.recommendedAdminId=recommendedAdminId;
+        
         if(companyid!=null&&code!=null){
             this.getOpenid()
         }
         else{
             alert('处理出现错误');
-            location.href='http://www.itchun.com';
+            location.href='daojia.jingrunjia.com.cn';
         }
         
   },
@@ -36,7 +43,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://www.itchun.com/login?openId='+openid+'&companyId='+this.company;
+                    location.href='daojia.jingrunjia.com.cn?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
                 }
                 else{
                    alert(res.data.msg);
