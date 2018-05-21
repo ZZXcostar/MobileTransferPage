@@ -37,7 +37,7 @@ export default {
         }
         else{
             alert('处理出现错误');
-            location.href='daojia.jingrunjia.com.cn';
+            location.href='sss.itchun.com';
         }
         
   },
@@ -49,7 +49,7 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://daojia.jingrunjia.com.cn/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
+                    location.href='http://sss.itchun.com/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
                 }
                 else{
                    alert(res.data.msg);
