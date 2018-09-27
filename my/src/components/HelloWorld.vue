@@ -13,31 +13,36 @@ export default {
       hostName:'',
       recommendedTeamId:'',
       recommendedAdminId:'',
+      presentationStr:''
     }
   },
   created(){
-        let json=JSON.parse(this.$route.query.json);
+     //  alert(window.location.href)
+        let datas=JSON.parse(this.$route.query.json);
 
         this.hostName = location.hostname;
         // let companyid=this.$route.query.company
         // let code=this.$route.query.code;
         // let recommendedTeamId=this.$route.query.recommendedTeamId;
         // let recommendedAdminId=this.$route.query.recommendedAdminId;
-        let companyid=json.company
+        let companyid=datas.company
         let code=this.$route.query.code;
-        let recommendedTeamId=json.recommendedTeamId;
-        let recommendedAdminId=json.recommendedAdminId;
+        let recommendedTeamId=datas.recommendedTeamId;
+        let recommendedAdminId=datas.recommendedAdminId;
+        let presentation = datas.presentation;
+
         this.company =  companyid
         this.code = code
         this.recommendedTeamId=recommendedTeamId;
         this.recommendedAdminId=recommendedAdminId;
+        this.presentationStr = presentation
         
         if(companyid!=null&&code!=null){
             this.getOpenid()
         }
         else{
             alert('处理出现错误');
-            location.href='www.itchun.com';
+            location.href='http://www.shhongzhiyun.com';
         }
         
   },
@@ -49,7 +54,13 @@ export default {
             .then(res=>{
                 if(res.data.info.code){
                     let openid=res.data.info.openId;
-                    location.href='http://www.itchun.com/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
+
+                   // alert(that.presentationStr)
+                    if(that.presentationStr == "isPresentation"){
+                      location.href='http://www.shhongzhiyun.com/presentationLogin?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
+                    }else{
+                      location.href='http://www.shhongzhiyun.com/login?openId='+openid+'&company='+that.company+'&recommendedTeamId='+that.recommendedTeamId+'&recommendedAdminId='+that.recommendedAdminId;
+                    }   
                 }
                 else{
                    alert(res.data.msg);
